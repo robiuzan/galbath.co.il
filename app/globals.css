@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+/*
+ * גל אמבטיות (Gal Ambatyot) design system (Tailwind v4). Fleet standard: Tailwind v4,
+ * tokens in `@theme` (see ../../Israeli services sites/docs/template-standard.md).
+ * Palette derived from the live galbath.co.il brand (deep indigo-blue + coral), so every
+ * existing utility (bg-primary, text-accent-foreground, rounded-xl, rounded-2xl,
+ * font-heading, ...) keeps working. Neutrals/success/error intentionally use Tailwind defaults.
+ */
+@theme {
+  /* Primary — deep brand indigo-blue (#2123BC) */
+  --color-primary: #2123bc;
+  --color-primary-50: #ecedfb;
+  --color-primary-100: #d3d4f6;
+  --color-primary-200: #adaeed;
+  --color-primary-300: #8385e3;
+  --color-primary-400: #5457d4;
+  --color-primary-500: #3033c4;
+  --color-primary-600: #2123bc;
+  --color-primary-700: #1a1c99;
+  --color-primary-800: #161778;
+  --color-primary-900: #0f1052;
+  --color-primary-foreground: #ffffff;
+
+  /* Secondary — royal blue (#3D55AD) */
+  --color-secondary: #3d55ad;
+  --color-secondary-50: #eef1fa;
+  --color-secondary-100: #d6ddf1;
+  --color-secondary-200: #b3c0e6;
+  --color-secondary-300: #8b9dda;
+  --color-secondary-400: #6478c6;
+  --color-secondary-500: #3d55ad;
+  --color-secondary-600: #33468f;
+  --color-secondary-700: #2b3a75;
+  --color-secondary-800: #232f5c;
+  --color-secondary-900: #172040;
+  --color-secondary-foreground: #ffffff;
+
+  /* Accent / CTA — warm coral (#EA5F53) */
+  --color-accent: #ea5f53;
+  --color-accent-50: #fdeeed;
+  --color-accent-100: #fbd4d0;
+  --color-accent-200: #f7b3ac;
+  --color-accent-300: #f28d84;
+  --color-accent-400: #ee766b;
+  --color-accent-500: #ea5f53;
+  --color-accent-600: #cf3f30;
+  --color-accent-700: #ab3227;
+  --color-accent-800: #862822;
+  --color-accent-900: #571a15;
+  --color-accent-foreground: #ffffff;
+
+  /* Border radius — reproduce the v3 overrides (rounded-lg stays v4 default 0.5rem). */
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.25rem;
+
+  /* Typography — body Heebo, headings Rubik (CSS vars from next/font in app/layout.tsx) */
+  --font-sans: var(--font-heebo), system-ui, Arial, sans-serif;
+  --font-heading: var(--font-rubik), var(--font-heebo), system-ui, sans-serif;
+}
+
+/*
+ * Tailwind v4 compatibility: v4 defaults border-color to currentColor; v3 defaulted to
+ * gray-200. Preserve the v3 look for any bare `border` utilities.
+ */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-gray-900 antialiased;
+    font-family: var(--font-heebo), system-ui, Arial, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-rubik), var(--font-heebo), system-ui, sans-serif;
+  }
+
+  /* Respect reduced-motion preference globally (brief Part I4 / WCAG). */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Isolate latin/LTR snippets (phone, email, URLs) inside RTL Hebrew text. */
+  .ltr {
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "_comment": "Normalized per-site manifest. SYNCED FROM THE HUB: 'Israeli services sites'/roster/sites/galbath.json. Edit there (the canonical roster) and sync here. Conforms to @ishub/site-kit SiteManifest.",
+  "domain": "galbath.co.il",
+  "url": "https://galbath.co.il",
+  "brandName": "גל אמבטיות",
+  "brandNameEn": "Gal Ambatyot",
+  "legalName": "גל אמבטיות",
+  "locale": "he-IL",
+  "dir": "rtl",
+  "foundedYear": null,
+  "tagline": "ציפוי אמבטיה מקצועי ואיכותי",
+  "shortPitch": "מומחים בציפוי ושיפוץ אמבטיות — מחדשים את האמבטיה בקלות, במהירות ובמחיר משתלם, בלי לכלוך ובלי לשבור קירות.",
+  "contact": {
+    "phoneDisplay": "055-6601006",
+    "phoneE164": "+972556601006",
+    "whatsappE164": "+972556601006",
+    "email": "service@galbath.co.il",
+    "phoneOverride": false
+  },
+  "brand": {
+    "themeColor": "#2123BC",
+    "primary": "#2123BC",
+    "secondary": "#3D55AD",
+    "accent": "#EA5F53",
+    "fontHeading": "Rubik",
+    "fontBody": "Heebo"
+  },
+  "schema": {
+    "type": "HomeAndConstructionBusiness",
+    "address": {
+      "streetAddress": "בורוכוב 49",
+      "addressLocality": "הרצליה",
+      "addressRegion": "מרכז",
+      "addressCountry": "IL"
+    },
+    "priceRange": "₪₪",
+    "areaServed": "תל אביב והמרכז ופריסה ארצית",
+    "openingHours": [
+      { "days": ["su", "mo", "tu", "we", "th"], "opens": "08:00", "closes": "18:00" },
+      { "days": ["fr"], "opens": "08:00", "closes": "15:00" }
+    ],
+    "sameAs": []
+  },
+  "analytics": {
+    "gtmId": "GTM-5K3WQN8W",
+    "googleSiteVerification": null
+  }
+}
