@@ -7,6 +7,7 @@ import { Section } from "@/components/ui/Section";
 import { FinalCta } from "@/components/marketing/FinalCta";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/איזורי-שירות/" },
   title: "אזורי שירות",
   description:
     "ציפוי, חידוש ושיפוץ אמבטיות בתל אביב והמרכז ובפריסה ארצית — לרוב מהיום להיום. בחרו את העיר שלכם.",

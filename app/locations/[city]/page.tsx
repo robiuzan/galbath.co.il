@@ -23,6 +23,7 @@ export function generateMetadata({ params }: { params: { city: string } }): Meta
   const loc = findLocation(params.city);
   if (!loc) return {};
   return {
+    alternates: { canonical: `/locations/${loc.slug}/` },
     title: `ציפוי אמבטיה ב${loc.name} | ${siteConfig.name}`,
     description: `ציפוי, חידוש ושיפוץ אמבטיות ב${loc.name} — מהיום להיום, בלי לשבור קירות, עם אחריות בכתב ומחיר הוגן. מעל 25 שנות ניסיון.`,
   };

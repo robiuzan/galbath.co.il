@@ -6,6 +6,7 @@ import { Section } from "@/components/ui/Section";
 import { LeadForm } from "@/components/forms/LeadForm";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/צור-קשר/" },
   title: "צור קשר",
   description:
     "צרו קשר עם גל אמבטיות לציפוי ושיפוץ אמבטיות בתל אביב והמרכז. טלפון, וואטסאפ או טופס — נחזור אליכם עם הצעת מחיר.",

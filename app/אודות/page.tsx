@@ -7,6 +7,7 @@ import { TrustBar } from "@/components/marketing/TrustBar";
 import { FinalCta } from "@/components/marketing/FinalCta";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/אודות/" },
   title: "אודות גל אמבטיות",
   description:
     "גל אמבטיות — מומחים בציפוי ושיפוץ אמבטיות עם מעל 25 שנות ניסיון. חומרים איכותיים, אחריות בכתב, שירות מהיום להיום ומחירים הוגנים ושקופים.",

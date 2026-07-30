@@ -4,6 +4,7 @@ import { Section } from "@/components/ui/Section";
 import { PricingTeaser } from "@/components/marketing/PricingTeaser";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/מחירון/" },
   title: "מחירון ציפוי ושיפוץ אמבטיות",
   description:
     "מחירון ציפוי, חידוש ושיפוץ אמבטיות להתרשמות: ציפוי אמבטיה, הלבשה, צביעה, תיקונים וציפוי כיורים. מחירים הוגנים ושקופים — המחיר הסופי לפי בדיקה.",
