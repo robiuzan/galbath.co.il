@@ -14,8 +14,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
    * next.config.mjs sets `trailingSlash: true`, so every page is served at `/path/` and a
    * slashless URL 301s. A sitemap must list the final destination, never the redirect —
    * so every `loc` here (and the per-page canonicals) carries the trailing slash.
+   *
+   * `encodeURI` percent-escapes the Hebrew slugs. The sitemap protocol requires escaped
+   * URLs, and Cloudflare Pages only matches the escaped asset key — it 404s a path sent
+   * as raw UTF-8 bytes. Escaping also makes `loc` byte-identical to the page's canonical.
    */
-  const absolute = (path: string) => (path ? `${base}/${path}/` : `${base}/`);
+  const absolute = (path: string) =>
+    encodeURI(path ? `${base}/${path}/` : `${base}/`);
 
   const staticPaths = [
     "",
