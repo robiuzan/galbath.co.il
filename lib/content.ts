@@ -136,6 +136,31 @@ export const trustStats = [
 ] as const;
 
 /**
+ * Before/after pairs for the homepage comparison gallery.
+ *
+ * `id` resolves to `/gallery/ba-<id>-before.webp` and `/gallery/ba-<id>-after.webp` —
+ * derivatives generated from the originals in assets/gallery/ and capped at 800px, which
+ * covers the 3-column tile at 2x. `subject` is the shared Hebrew description; the widget
+ * appends "לפני" / "אחרי" so neither frame ships an empty alt.
+ *
+ * Tiles are a uniform 3:2 box, so pair 07 (the only portrait shot) is centre-cropped.
+ */
+export interface BeforeAfterPair {
+  id: string;
+  subject: string;
+}
+
+export const beforeAfterPairs: BeforeAfterPair[] = [
+  { id: "01", subject: "כיור אמבטיה עם ברז זורם" },
+  { id: "02", subject: "אמבטיה ישנה בהכנה לציפוי — הסרת ציפוי מתקלף" },
+  { id: "03", subject: "פינת מקלחון עם עובש בסיליקון וברובה" },
+  { id: "04", subject: "פינת אמבטיה עם אריחים מוכתמים וחלודה" },
+  { id: "05", subject: "אמבטיה ישנה עם כתמי חלודה וברז מיושן" },
+  { id: "06", subject: "פתח ניקוז חלוד עם כתמי אבנית" },
+  { id: "07", subject: "כיור רחצה עם כתמי אבנית וצהבת" },
+];
+
+/**
  * Indicative price ranges (live-site audit / מחירון). All prices are before a ₪70
  * call-out fee. Final price is set after an on-site inspection.
  */

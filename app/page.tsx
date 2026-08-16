@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Hero } from "@/components/marketing/Hero";
 import { TrustBar } from "@/components/marketing/TrustBar";
+import { BeforeAfterGallery } from "@/components/marketing/BeforeAfterGallery";
 import { ServicesGrid } from "@/components/marketing/ServicesGrid";
 import { WhyUs } from "@/components/marketing/WhyUs";
 import { Process } from "@/components/marketing/Process";
@@ -28,6 +29,7 @@ export default function HomePage() {
       />
       <Hero />
       <TrustBar />
+      <BeforeAfterGallery />
       <ServicesGrid />
       <WhyUs />
       <Process />
