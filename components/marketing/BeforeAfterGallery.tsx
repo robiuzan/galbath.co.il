@@ -9,7 +9,11 @@ import { Reveal } from "@/components/ui/Reveal";
 import { beforeAfterPairs, type BeforeAfterPair } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
-/** Tiles are 1 / 2 / 3 across; `sizes` mirrors those breakpoints. */
+/**
+ * Widest a tile ever gets. Inert in practice — the export runs images.unoptimized, so
+ * next/image emits a bare src with no srcset for the browser to choose from — but it keeps
+ * the markup honest if optimization is ever switched on.
+ */
 const SIZES = "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw";
 
 /**
@@ -83,7 +87,13 @@ function Compare({ pair }: { pair: BeforeAfterPair }) {
           className="pointer-events-none absolute inset-y-0 w-0.5 bg-white/90 shadow-[0_0_6px_rgba(0,0,0,0.35)]"
           style={{ left: `${split}%` }}
         >
-          <span className="absolute top-1/2 flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-md ring-1 ring-gray-900/10">
+          {/* left-1/2 is load-bearing, not decoration. With no horizontal offset the knob
+              falls back to the static position, which an RTL containing block resolves from
+              the RIGHT edge — pinning this 36px circle to the right of the 2px divider and
+              then dragging it 18px further left, landing it 35px off the seam it exists to
+              grab. Anchoring explicitly centres it in both directions. Do not swap in
+              inset-x-0: left+right+width is over-constrained, and RTL drops `left`. */}
+          <span className="absolute top-1/2 left-1/2 flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-md ring-1 ring-gray-900/10">
             <ChevronsLeftRight className="h-5 w-5 text-primary" />
           </span>
         </div>
@@ -114,22 +124,48 @@ function Compare({ pair }: { pair: BeforeAfterPair }) {
   );
 }
 
+/**
+ * Just the tiles. Split out from the section wrapper below because the service and location
+ * pages drop the gallery inside an existing `Section` — nesting another one would double the
+ * vertical padding and the container.
+ *
+ * `columns` is the widest the grid ever goes: 3 in a full-width container, 2 when it sits in
+ * the narrow `max-w-3xl` prose column on the location pages, where thirds would leave the
+ * tiles too small to read. Both classes are spelled out because Tailwind only sees literals.
+ */
+export function BeforeAfterGrid({
+  columns = 3,
+  className,
+}: {
+  columns?: 2 | 3;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        "grid gap-5",
+        columns === 3 ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2",
+        className,
+      )}
+    >
+      {beforeAfterPairs.map((pair, i) => (
+        <Reveal key={pair.id} delay={(i % columns) * 0.08}>
+          <Compare pair={pair} />
+        </Reveal>
+      ))}
+    </div>
+  );
+}
+
+/** Hint that the tiles are draggable — the split is not obviously interactive on its own. */
+export const galleryHint = "גררו את הסמן על כל תמונה כדי לראות את האמבטיה לפני הציפוי ואחריו.";
+
+/** Homepage treatment: its own full-bleed section with the standard centered heading. */
 export function BeforeAfterGallery() {
   return (
     <Section id="gallery" tone="white">
-      <SectionHeading
-        eyebrow="לפני ואחרי"
-        title="התוצאות מדברות בעד עצמן"
-        subtitle="גררו את הסמן על כל תמונה כדי לראות את האמבטיה לפני הציפוי ואחריו."
-      />
-
-      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {beforeAfterPairs.map((pair, i) => (
-          <Reveal key={pair.id} delay={(i % 3) * 0.08}>
-            <Compare pair={pair} />
-          </Reveal>
-        ))}
-      </div>
+      <SectionHeading eyebrow="לפני ואחרי" title="התוצאות מדברות בעד עצמן" subtitle={galleryHint} />
+      <BeforeAfterGrid className="mt-10" />
     </Section>
   );
 }

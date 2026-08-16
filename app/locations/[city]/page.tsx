@@ -6,6 +6,7 @@ import { locations, type LocationSlug, siteConfig } from "@/lib/site-config";
 import { serviceCards } from "@/lib/content";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/ui/Section";
+import { BeforeAfterGrid, galleryHint } from "@/components/marketing/BeforeAfterGallery";
 import { FinalCta } from "@/components/marketing/FinalCta";
 
 export function generateStaticParams(): { city: LocationSlug }[] {
@@ -57,6 +58,12 @@ export default function LocationPage({ params }: { params: { city: string } }) {
             המרכז, לרוב מהיום להיום. התהליך אורך כ-3–6 שעות והאמבטיה מוכנה לשימוש תוך כ-24
             שעות.
           </p>
+
+          {/* Two across, not three: this column is max-w-3xl, so thirds would leave the
+              before/after halves too small to tell apart. */}
+          <h2 className="mt-10 font-heading text-xl font-bold text-primary">לפני ואחרי</h2>
+          <p className="mt-2 text-gray-700">{galleryHint}</p>
+          <BeforeAfterGrid columns={2} className="mt-6" />
 
           <h2 className="mt-10 font-heading text-xl font-bold text-primary">
             השירותים שלנו ב{loc.name}

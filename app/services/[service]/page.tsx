@@ -15,6 +15,7 @@ import { serviceJsonLd, jsonLdScript } from "@ishub/site-kit/seo";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
+import { BeforeAfterGrid, galleryHint } from "@/components/marketing/BeforeAfterGallery";
 import { FinalCta } from "@/components/marketing/FinalCta";
 
 export function generateStaticParams(): { service: ServiceSlug }[] {
@@ -131,6 +132,14 @@ export default function ServicePage({ params }: { params: { service: string } })
               </div>
             </div>
           </aside>
+        </div>
+
+        {/* Before/after — full width, below the two-column block so it is not squeezed into
+            the 2/3 text column beside the sticky CTA. */}
+        <div className="mt-14 border-t border-gray-100 pt-10">
+          <h2 className="font-heading text-xl font-bold text-primary">לפני ואחרי</h2>
+          <p className="mt-2 text-gray-700">{galleryHint}</p>
+          <BeforeAfterGrid className="mt-6" />
         </div>
 
         {/* Related services */}
