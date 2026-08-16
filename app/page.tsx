@@ -14,7 +14,10 @@ import { Faq } from "@/components/marketing/Faq";
 import { FinalCta } from "@/components/marketing/FinalCta";
 
 // Site-wide LocalBusiness + FAQ JSON-LD — from the shared @ishub/site-kit builder (manifest-driven).
-const jsonLd = [localBusinessJsonLd(manifest), faqJsonLd([...faqs])];
+const jsonLd = [
+  localBusinessJsonLd(manifest, { logo: "/galbath-logo-dark.webp" }),
+  faqJsonLd([...faqs]),
+];
 
 export default function HomePage() {
   return (

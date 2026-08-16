@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { siteConfig, telHref, services, locations } from "@/lib/site-config";
@@ -11,9 +12,14 @@ export function Footer() {
       <Container className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         {/* Brand + contact */}
         <div>
-          <p className="font-heading text-2xl font-extrabold text-white">
-            {siteConfig.name}
-          </p>
+          {/* Light-ink mark — the footer sits on the primary blue. */}
+          <Image
+            src="/galbath-logo-light.webp"
+            alt={siteConfig.name}
+            width={782}
+            height={275}
+            className="h-12 w-auto"
+          />
           <p className="mt-3 text-sm text-white/70">{siteConfig.tagline}</p>
           <ul className="mt-5 space-y-2 text-sm">
             <li className="flex items-center gap-2">

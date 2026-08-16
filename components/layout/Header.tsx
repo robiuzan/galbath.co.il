@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Menu, Phone, X } from "lucide-react";
 import { siteConfig, telHref } from "@/lib/site-config";
@@ -15,12 +16,16 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-gray-100 bg-white/95 backdrop-blur">
       <Container className="flex h-16 items-center justify-between gap-4">
-        <Link
-          href="/"
-          className="font-heading text-2xl font-extrabold text-primary"
-          aria-label={`${siteConfig.name} — דף הבית`}
-        >
-          {siteConfig.name}
+        <Link href="/" className="shrink-0" aria-label={`${siteConfig.name} — דף הבית`}>
+          {/* alt="" — the link already carries the accessible name via aria-label. */}
+          <Image
+            src="/galbath-logo-dark.webp"
+            alt=""
+            width={782}
+            height={275}
+            priority
+            className="h-9 w-auto sm:h-10"
+          />
         </Link>
 
         {/* Desktop nav */}

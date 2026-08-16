@@ -32,6 +32,15 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.tagline,
+  // favicon.ico + apple-touch-icon are rendered from the same "גל" mark as the
+  // supplied galbath_favicon.webp, at sizes WebP-shy clients and iOS need.
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/galbath_favicon.webp", type: "image/webp", sizes: "50x50" },
+    ],
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
+  },
   openGraph: {
     type: "website",
     locale: "he_IL",
