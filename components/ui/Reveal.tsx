@@ -32,27 +32,54 @@ export function Reveal({
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    /**
+     * Reached-yet test. "Scrolled past" counts as reached: an instant jump — an in-page
+     * anchor, or the Back button restoring scroll — can carry an element from below the
+     * fold to above it without its intersection ratio ever leaving 0, so the observer
+     * never fires and the content would stay at opacity:0 for good.
+     */
+    const reached = () => {
+      const rect = el.getBoundingClientRect();
+      return rect.top < window.innerHeight;
+    };
+
     // Already on screen at mount → just show it (no hide-then-fade flash).
-    const rect = el.getBoundingClientRect();
-    const inViewNow = rect.top < window.innerHeight && rect.bottom > 0;
-    if (inViewNow) {
+    if (reached()) {
       setState("shown");
       return;
     }
 
     // Below the fold → hide it, then fade up when it scrolls into view.
     setState("hidden");
+
+    let settled = false;
+    const show = () => {
+      if (settled) return;
+      settled = true;
+      setState("shown");
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
+
     const observer = new IntersectionObserver(
-      (entries, obs) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          setState("shown");
-          obs.disconnect();
-        }
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) show();
       },
       { rootMargin: "-60px" },
     );
+    // Backstop for the jump case the observer structurally cannot see. Both a programmatic
+    // scrollTo and scroll restoration emit a scroll event, and this unsubscribes on first
+    // reveal, so at most the handful of still-hidden blocks are ever listening.
+    const onScroll = () => {
+      if (reached()) show();
+    };
+
     observer.observe(el);
-    return () => observer.disconnect();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   return (
